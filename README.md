@@ -7,6 +7,7 @@
 - PRD（Persona / Epic / User Story）: [Notion: PRD（SmartKoutei ビュー）](https://app.notion.com/p/takumi-giken/3eed2b290a60804ab7b1eaf278f33657?v=3eed2b290a60801b9651000c7953174d)
 - 学習の進め方: [LEARNING.md](./LEARNING.md)
 - 進捗と現在地: [docs/progress.md](./docs/progress.md)
+- docs の構成とルール: [docs/README.md](./docs/README.md)
 - AI エージェント向けの指示: [AGENTS.md](./AGENTS.md)
 
 要求の正は Notion の PRD とする。この README はプロダクトの概要をまとめたもの。
