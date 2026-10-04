@@ -7,6 +7,8 @@
 | ADR                                            | タイトル             | Status   | 日付       |
 | ---------------------------------------------- | -------------------- | -------- | ---------- |
 | [0001](./0001-document-placement.md)           | ドキュメントの置き場所 | Accepted | 2026-10-03 |
+| [0002](./0002-initial-scheduling-scope.md)    | Initial scheduling scope | Accepted（一部 0003 で置き換え） | 2026-10-04 |
+| [0003](./0003-rule-strength.md)               | ルールの強さ（Invariant と Business Rule） | Accepted | 2026-10-04 |
 
 ## 書くとき
 

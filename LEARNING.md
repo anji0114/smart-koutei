@@ -6,7 +6,7 @@
 
 ## Learning Policy
 
-AI は完成した設計を先に提示する設計者ではなく、Reviewer として使う。
+設計の判断は自分で行う。AI は完成した設計を先に提示する設計者としては使わず、考えを整える・書き起こす・レビューする・実装の細部を書く役として使う（詳細は `AGENTS.md` の「役割分担」）。
 
 基本ループ:
 
@@ -33,7 +33,7 @@ Codex へは「最適解を作って」ではなく、原則として以下を�
 
 まず以下の Vertical Slice だけを設計・実装する。
 
-> 既に工程が定義されている製造オーダーについて、各工程を設備と日付に割り当て、工程順序と設備能力を満たすスケジュールを作成・変更する。
+> 既に工程が定義されている受注について、各工程を設備と日付に割り当て、工程順序と設備能力を満たすスケジュールを作成・変更する。
 
 この Slice を選ぶ理由:
 
@@ -89,7 +89,7 @@ Codex へは「最適解を作って」ではなく、原則として以下を�
 - 後工程を前工程より先に予定してよいか
 - 1 工程を複数設備に同時割当してよいか
 - 設備能力を超えた計画を保存してよいか
-- 製造オーダーの納期を超える計画は保存可能か
+- 受注の納期を超える計画は保存可能か
 - 予定開始日と予定完了日の関係はどうあるべきか
 - スケジュール変更時、後工程をどう扱うか
 
@@ -124,7 +124,7 @@ Domain Rule を自然に表現できるモデルを考える。
 
 候補となる概念は先に固定しないが、現在の言葉としては以下がある。
 
-- ManufacturingOrder / 製造オーダー
+- 受注（英語名は `docs/glossary.md` で決める）
 - Operation / 工程
 - Equipment / 設備
 - Capacity / 能力
@@ -160,10 +160,10 @@ Entity や Value Object にすること自体を目的にしない。
 
 特に検討する。
 
-- ManufacturingOrder と Operation は同一 Aggregate か
-- Equipment は ManufacturingOrder Aggregate の中に入るのか
+- 受注と Operation は同一 Aggregate か
+- Equipment は受注の Aggregate の中に入るのか
 - Capacity を誰が所有するのか
-- 複数の ManufacturingOrder が 1 台の Equipment を取り合う場合、どこで整合性を守るか
+- 複数の受注が 1 台の Equipment を取り合う場合、どこで整合性を守るか
 
 ### 読む DDD テーマ
 
@@ -266,8 +266,8 @@ UI はモデルの不自然さを見つけるためだけに作る。
 
 例:
 
-- 製造オーダー一覧
-- 製造オーダー詳細 + 工程一覧
+- 受注一覧
+- 受注詳細 + 工程一覧
 - 設備別の日次スケジュール
 
 ドラッグ&ドロップなどは不要。
@@ -309,10 +309,10 @@ CRUD Test より Domain Rule Test を優先する。
 
 最低限候補:
 
-- ADR-001: Initial scheduling scope
-- ADR-002: Aggregate boundaries
-- ADR-003: Capacity consistency strategy
-- ADR-004: Domain model vs persistence model
+- Initial scheduling scope
+- Aggregate boundaries
+- Capacity consistency strategy
+- Domain model vs persistence model
 
 ADR には最低限以下を書く。
 

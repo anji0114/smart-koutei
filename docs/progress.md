@@ -19,9 +19,9 @@ AI エージェントに再開を頼むときは「`docs/progress.md` を読ん�
 | Step | やること                                                         | 成果物                                       | 状態   |
 | ---- | ---------------------------------------------------------------- | -------------------------------------------- | ------ |
 | 0    | 準備: README / AGENTS.md / アーキテクチャ                        | `README.md`、`AGENTS.md`、`docs/design/architecture.md` | 完了   |
-| 1    | Use Case: 誰が何を判断する操作かを 3〜5 個に絞る                 | `docs/design/use-cases/`                     | 着手中 |
-| 2    | Domain Rule / Invariant: 何が起きたら業務上おかしいかを列挙する  | `docs/design/domain-rules.md`                | 未着手 |
-| 3    | Domain Model: ルールを自然に表現できるモデルを考える             | `docs/design/domain-model.md`                | 未着手 |
+| 1    | Use Case: 誰が何を判断する操作かを 3〜5 個に絞る                 | `docs/design/use-cases/`、`scope.md`、ADR-0002 | 完了   |
+| 2    | Domain Rule / Invariant: 何が起きたら業務上おかしいかを列挙する  | `docs/design/domain-rules.md`、ADR-0003      | 完了   |
+| 3    | Domain Model: ルールを自然に表現できるモデルを考える             | `docs/design/domain-model.md`                | 着手中 |
 | 4    | Aggregate Boundary: 1 Transaction で整合すべき範囲を決める       | `docs/design/aggregates.md`、ADR             | 未着手 |
 | 5    | Transaction / Concurrency: 同時更新で壊れないかを考える          | `docs/design/concurrency.md`、ADR            | 未着手 |
 | 6    | Data Model: ER 図と Drizzle Schema を設計する                    | `docs/design/data-model.md`、ADR             | 未着手 |
@@ -42,19 +42,24 @@ AI エージェントに再開を頼むときは「`docs/progress.md` を読ん�
 
 ## 現在地
 
-**Slice: Initial / Step 1: Use Case**
+**Slice: Initial / Step 3: Domain Model**
 
 ## 次にやること
 
-- [ ] `docs/design/use-cases/README.md` の「どこまで書くか」「進め方」を読む
-- [ ] 同 README の「候補の洗い出し」に候補を書き出す（質より量。10 個出てもよい）
-- [ ] 3〜5 個に絞り、`_template.md` をコピーして 1 Use Case 1 ファイルで書く
-- [ ] Scope 外にしたものを理由付きで書く
+- [ ] `docs/design/domain-model.md` の「やること」を読む
+- [ ] 概念ごとに「何を知っているか」「何を判断・計算するか」を書く（箇条書きでよい。AI が整える）
+- [ ] R1〜R5 を誰が守る・計算するかを決める
+- [ ] Entity / Value Object を理由つきで決める
 - [ ] AI にレビューを依頼する
 
 ## 作業ログ
 
 新しいものを上に書く。
 
+- 2026-10-04: Step 2 完了。ルールの強さを決定（ADR-0003: R1・R2 は Invariant、R3 は計算の仕方、R4 は警告、R5 は仮定、R6 は次の Slice）。「製造オーダー」をやめて「受注」に統一、工程 1 つ分は「割当」と呼ぶ。完了ボタン（UC-02）は次の Slice。Step 3 の作業シートを作成
+- 2026-10-04: 開発環境のバージョンを Node.js 24、pnpm `>=11.0.0 <12` に決定。architecture.md に反映。導入は未実施
+- 2026-10-04: Step 1 完了。Slice を確定（ADR-0002、README 更新）。C2（能力時間）も「追加時は禁止、後から破れたら警告」に変更。Step 2 の作業シート `docs/design/domain-rules.md` を作成
+- 2026-10-03: UC-01（スケジュールを作成する）をレビュー済みにした。Constraint は C1（正規スケジュールは 1 本）、C2（設備の 1 日の能力時間）、C4（日をまたぐ。設備ごとに順番を持つ）、C5（依存。追加時は禁止、ずれで破れたらアラート）。連鎖の論点（順番の決め方、設備の空き日、受注をまたぐずれ）は Step 2 へ
+- 2026-10-03: 元メモを操作ごとに分割（事務: 受注登録 / 課長: スケジュール作成）。スコープが広すぎるため `docs/design/scope.md` で絞り込みを開始。テンプレートに事前条件を追加
 - 2026-10-03: AGENTS.md の役割分担を変更（開発者が判断し、AI は整える・書き起こす・レビュー・実装）。`docs/` のフォルダ構成を決定（ADR-0001、`docs/README.md`）。Use Case を 1 ファイル 1 件に分割。用語集を `docs/glossary.md` に移動
 - 2026-10-03: AGENTS.md、`docs/design/architecture.md` を作成。技術スタックを確定（Hono on Node.js / React + Vite / PostgreSQL / Drizzle / Hono RPC / pnpm workspaces / Vitest）。Step 1 に着手
