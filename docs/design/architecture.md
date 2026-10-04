@@ -9,11 +9,13 @@
 | 言語                 | TypeScript（Backend / Frontend とも）             |
 | Backend              | Hono                                              |
 | Backend の実行環境   | Node.js                                           |
+| Node.js のバージョン | 24 系                                             |
 | Frontend             | React + Vite（SPA）                               |
 | Database             | PostgreSQL                                        |
 | ORM                  | Drizzle                                           |
 | API の型共有         | Hono RPC                                          |
 | パッケージ管理       | pnpm workspaces（monorepo）                       |
+| pnpm のバージョン    | `>=11.0.0 <12`                                    |
 | テスト               | Vitest（Backend / Frontend とも）                 |
 | 構成                 | Frontend と Backend を分離し、HTTP API で通信する |
 | ディレクトリ         | `client/`（Frontend）、`server/`（Backend）       |
@@ -75,7 +77,6 @@ Drizzle のスキーマ定義は Data Model（テーブル構造）を表す。D
 | ---------------------------------- | --------------------------------------- | ----------------------------------------- |
 | Frontend のルーティング / データ取得 | React Router / TanStack Router / TanStack Query など | Step 7（最小実装）の前                    |
 | Backend の内部構成（レイヤー分け） | —                                       | Step 3〜4（Domain Model / Aggregate）の後 |
-| Node.js のバージョン               | —                                       | Step 7 の前                               |
 | 認証・インフラ・デザインシステム   | 原則扱わない                            | —                                         |
 
 Backend の内部構成は、Domain Model と Aggregate Boundary が決まる前に決めない。層の分け方を先に決めると、設計がその型に引きずられるため。
